@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/6/27 20:47
+# @Author  : Ting
+# @Site    : 
+# @File    : 4.3创建数值列表.py
+# @Software: PyCharm
+
+#使用range生成一系列数字
+#输出1至4的整数，差一行为导致只能输出到4（5-1）
+for value in range(1,5):
+   print(value)
+
+#函数list可将一些列数字直接转化为列表
+number=list(range(1,6))
+print(number)
+
+#range函数指定步长
+#生成1到10之内的偶数列表（注意是列表要用list函数）
+even_numbers=list(range(2,11,2))
+print(even_numbers)
+
+#将前10个整数的平方加入到一个列表中
+#第一种
+squares=[]
+for value in  range(1,11):
+    square=value**2
+    squares.append(square)
+    print(squares)
+#区别这个输出结果与上面的不同之处，不再每次循环后输出
+print(squares)
+
+#第二种方法，不再使用临时变量square--P52
+#注意冒号！！！
+squares=[]
+for value in range(1,11):
+    squares.append(value**2)
+print(squares)
+
+#第三种方法，列表解析，只需一行代码就可实现--P53
+#for后面没有冒号
+squares=[value**2 for value in range(1,11)]
+print(squares)
+
+
+练习
+# 打印1到20
+for value in range(1, 21):
+    print(value)
+
+# 打印1到一百万
+# 按旁边的stop可停止输出，快捷键ctrl+C不管用
+for value in range(1, 1000001):
+    print(value)
+
+#对数字列表进行简单的统计运算
+list=list(range(1,100001))
+print(list)
+print(min(list))
+print(max(list))
+print(sum(list))
+
+#奇数
+list=list(range(1,21,2))
+print(list)
+
+
+for value in  range(1,21,2):
+    print(value)
+
+#3的倍数
+list=list(range(3,31,3))
+print(list)
+
+for value in  range(3,31,3):
+    print(value)

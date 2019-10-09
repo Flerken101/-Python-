@@ -1,0 +1,29 @@
+#计算第九章所有的练习代码大致包含多少个单词
+# （当Chapter 9文件的后缀名是.py时,注意open()函数的参数，多了encoding='gb18030',errors='ignore'）
+
+filename = "Chapter 9.py"
+
+try:
+    with open(filename,encoding='gb18030',errors='ignore') as file_object:
+        contents = file_object.read()
+except FileNotFoundError:
+    print("Sorry, the file "+ filename + " does not exist.")
+else:
+    words = contents.split()
+    words_number = len(words)
+    print("The text has " + str(words_number) + " words.")
+
+#计算第九章所有的练习代码大致包含多少个单词（）
+# （当Chapter 9文件的后缀名是.txt时,注意open()函数的参数,正常）
+
+filename = "Chapter 9.txt"
+
+try:
+    with open(filename) as file_object:
+        contents = file_object.read()
+except FileNotFoundError:
+    print("Sorry, the file "+ filename + " does not exist.")
+else:
+    words = contents.split()
+    words_number = len(words)
+    print("The text has " + str(words_number) + " words.")

@@ -1,0 +1,174 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/7/6 12:30
+# @Author  : Ting
+# @Site    : 
+# @File    : Chapter 6习题.py
+# @Software: PyCharm
+
+# 6-1 人
+information = {'first_name':'Julian','last_name':'Aaron','city':'New York'}
+
+print(information['first_name'])
+print(information['last_name'])
+print(information['city'])
+
+
+#6-3 编程词汇字典
+programming_vocabularies = {
+    'rstrip':'deleting trailing spaces',
+    'lstrip':'deleting the opening space',
+    'append':'adding elements at the end of the list',
+    'sort':'permanently sorting of lists',
+    'pop':'deleting the element and then use its value'
+    }
+print('\n'+'The meaning of rstrip is '+programming_vocabularies['rstrip']+'.')
+print('lstrip'+':'+programming_vocabularies['lstrip'])
+print('The meaning of append is '+programming_vocabularies['append']+'.')
+print('sort'+':'+programming_vocabularies['sort'])
+print('The meaning of pop is '+programming_vocabularies['pop']+'.')
+
+#6.4 词汇表2（使用for遍历）
+print('\n')
+programming_vocabularies = {
+    'rstrip':'deleting trailing spaces',
+    'lstrip':'deleting the opening space',
+    'append':'adding elements at the end of the list',
+    'sort':'permanently sorting of lists',
+    'pop':'deleting the element and then use its value'
+    }
+
+for vocabulary,meaning in programming_vocabularies.items():
+    print('The meaning of '+ vocabulary +' is '+ meaning+'.')
+
+#6.5 河流
+rivers={
+    'nile':'egypt',
+    'yangtze river':'china',
+    'yellow river':'china'
+    }
+
+print('\n')
+for river,country in rivers.items():
+    print('The '+river.title()+' runs through '+ country.title()+'.')
+
+print('\n')
+for river in rivers:
+    print(river.title())
+
+print('\n')
+for country in rivers.values():
+    print(country.title())
+
+print('\n')
+for country in set(rivers.values()):
+    print(country.title())
+
+#6-6 调查
+favorite_language = {
+    'jen':'python',
+    'sarah':'c',
+    'edward':'ruby',
+    'phil':'python',
+    }
+personnel_list = ['jen','edward','abigail']
+
+print('\n')
+for name in personnel_list:
+    if name in favorite_language.keys():
+        print(name.title()+',thanks for participating in the survey.')
+    else:
+        print(name.title()+ ',please take our poll!')
+
+# 6-7人 （列表中嵌套字典）
+information_1= {'first_name':'Julian','last_name':'Aaron','city':'New York'}
+information_2= {'first_name':'Nanthan','last_name':'Hale','city':' ChengTu'}
+information_3= {'first_name':'Oliver','last_name':'Clinton','city':'Sian'}
+
+information = [information_1,information_2,information_3]
+
+for A in information:
+    #为了能一个information输一次，理解思想
+    print('\n')
+    for a,b in A.items():
+        print('\t'+a.title()+': '+ b)
+
+#6-8 宠物（列表中嵌套字典）（作废，再重新读题,想复杂了）
+honey={'variety':'persian','master':'Julian'}
+candy={'variety':'siamese','master':'Nanthan'}
+mark={'variety':'chinchilla','master':'Oliver'}
+
+cats = [honey,candy,mark]
+
+for cat_number in range(3):
+    cat1=cats[cat_number] #这是错误的写法。在字典列表（列表中嵌套字典）的情况中，不可能将字典的名称用for循环出来。
+    print(cat1.title()+':')
+    print('\n')
+for cat in cats:
+    for key,value in cat.items():
+        print('\t'+ key.title()+': '+ value.title())
+
+#在下面这种情况下可以将列表中的元素循环出来，见下例。观察两者的区别。
+cats = ['honey','candy','mark']
+
+for cat_number in range(0,3):
+    print(cats[cat_number])
+
+#但其实有更简单的方法,所以思想很重要
+cats = ['honey','candy','mark']
+for cat in cats:
+    print(cat)
+
+
+#6-8 宠物（列表中嵌套字典）
+cat = {'type':'persian','variety':'cat','master':'Julian'}
+dog ={'type':'siamese','variety':'dog','master':'Nanthan'}
+bird={'type':'chinchilla','variety':'bird','master':'Oliver'}
+
+pets = [cat,dog,bird]
+
+for pet in pets:
+    print('\n')
+    #一定要分清遍历字典时，最多只有两个变量，而且分清哪些是键，哪些是值
+    for key,value in pet.items():
+        print('\t'+ key.title() + ': '+value.title())
+
+#6-9 喜欢的地方（字典中嵌套列表）
+favorite_places = {
+    'Julian':['a','b','c'],
+    'Nanthan':['d','e','f'],
+    'Oliver':['g','h','i']
+    }
+
+for name,palces in favorite_places.items():
+    print('\n'+ name.title() + "'s favorite places are ")
+    for place in palces:
+        print('\t'+ place.title())
+
+#6-7，8都是列表中嵌套字典，代码规律：先遍历列表再遍历字典，变量是先一后二；
+#6-9,10都是字典中嵌套列表，代码规律：先遍历字典再遍历列表，变量是先二后一。
+
+#6-11 城市（字典中储存列表）
+cities ={
+    'new york':{
+        'country':'America',
+        'population':'8.51 million',
+        'fact':'beautiful'
+        },
+    'paris':{
+        'country':'France',
+        'population':'214 million',
+        'fact':'romantic'
+        },
+    'beijing':{
+        'country':'China',
+        'population':'217 million',
+        'fact':'bustling'
+        },
+    }
+
+for city,infor in cities.items():
+    print('\nCity Name: '+ city.title())
+    for key,value in infor.items():
+        print('\t'+ key.title() + ': '+ value)
+

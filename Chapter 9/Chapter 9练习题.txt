@@ -1,0 +1,622 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/7/22 15:10
+# @Author  : Ting
+# @Site    : 
+# @File    : Chapter 9练习题.py
+# @Software: PyCharm
+
+'''9-1参观:创建一个名为Restaurant的类，其方法__init__( )设置两个属性：
+restaurant_name 和cuisine_type.创建一个名为describe_restaurant()的方法和
+一个名为open_restaurant( )的方法，其中前者打印前述两项信息，而后者打印一条消息，指出餐馆正在营业。
+根据这个类创建一个名为restaurant 的实例， 分别打印其两个属性， 再调用前述两个方法。'''
+
+class Restaurant():
+    """一次模拟餐馆的简单尝试"""
+
+    def __init__(self,restaurant_name,cuisine_type):
+        """初始化描述餐馆的属性"""
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+
+    def describe_restaurant(self):
+        """简单描述餐馆的名字及主营菜品"""
+        print("The " + self.restaurant_name.title() + " is mainly engaged in " +
+            self.cuisine_type + ".")
+
+    def open_restaurant(self):
+        """打印一条消息指出餐馆正在营业"""
+        print("The restaurant is open now.")
+
+#创建实例
+restaurant = Restaurant('elbow crispy','Tianjin cuisine')
+#调用方法
+restaurant.describe_restaurant()
+restaurant.open_restaurant()
+
+'''9-2 一家餐馆： 根据你为完成练习 9-1而编写的类创建一个实例， 
+并对该实例调用方法'''
+
+restaurant_1 = Restaurant('salt-roasted chicken','Cantonese cuisine')
+restaurant_1.describe_restaurant()
+restaurant_1.open_restaurant()
+
+'''9-3 用户:创建一个名为User的类，其中包含属性first_name 和last_name，
+还有用户简介通常会存储的其他几个属性。在类User中定义一个名为describe_user()的方法，
+它打印用户信息摘要；再定义一个名为greet_user( ) 的方法， 它向用户发出个性化的问候。
+创建多个表示不同用户的实例， 并对每个实例都调用上述两个方法。'''
+
+class User():
+    """一次模拟用户列表的简单尝试"""
+
+    def __init__(self, first_name, last_name, location="Beijing"):
+        """初始化描述用户信息的属性"""
+        self.first_name = first_name
+        self.last_name = last_name
+        self.location = location
+        self.field = 'Data Mining'
+
+    def describe_user(self):
+        """打印用户信息摘要"""
+        info = self.first_name + " " + self.last_name + "   " + self.location\
+               + "   " + self.field
+        return info.title()
+
+    def greet_user(self):
+        print("Hello, " + self.first_name.title() + " " +
+              self.last_name.title() + "!")
+
+
+# c创建实例
+user = User("albert", 'einstein')
+# 调用方法
+print(user.describe_user())
+user.greet_user()
+
+'''9-4 就餐人数:在为完成练习9-1而编写的程序中，添加一个名为number_served的属性，
+并将其默认值设置为0。根据这个类创建一个名为restaurant 的实例； 
+打印有多少人在这家餐馆就餐过，然后修改这个值并再次打印它。
+添加一个名为set_number_served( )的方法，它让你能够设置就餐人数。
+调用这个方法并向它传递一个值， 然后再次打印这个值。
+添加一个名为increment_number_served( )的方法，它让你能够将就餐人数递增。 
+调用这个方法并向它传递一个这样的值：你认为这家餐馆每天可能接待的就餐人数。'''
+
+class Restaruant():
+    """一次模拟餐馆的简单尝试"""
+
+    def __init__(self, restaurant_name, cuisine_type):
+        """初始化描述餐馆的属性"""
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+        self.number_served = 0
+
+    def describe_restaurant(self):
+        """简单描述餐馆的名字及主营菜品"""
+        print("The " + self.restaurant_name.title() + " is mainly engaged in " +
+              self.cuisine_type + ".")
+
+    def open_restaurant(self):
+        """打印一条消息指出餐馆正在营业"""
+        print("The restaurant is open now.")
+
+    def guests_number(self):
+        """打印一条关于接待客人人数的消息"""
+        print('This restaurant has received ' + str(self.number_served) +
+              " guests.")
+
+    def set_number_served(self, a):
+        """将接待过的客人人数设置为特定的值"""
+        if a >= self.number_served:
+            self.number_served += a
+        else:
+            print("Please try again.")
+
+    def increment_number_served(self, b):
+        """将餐馆接待过的人数增加特定的值"""
+        print("I think " + restaurant.restaurant_name.title() +
+              " can accommodate " + str(b) + " guests today.")
+        self.number_served += b
+
+# 创建实例
+restaurant = Restaruant('elbow crispy', 'Tianjin cuisine')
+
+# 调用方法
+
+#打印有多少人在这家餐馆就餐过
+restaurant.describe_restaurant()
+restaurant.guests_number()
+
+#然后修改这个值并再次打印它
+restaurant.number_served = 1000
+restaurant.guests_number()
+
+#设置就餐人数,调用方法set_number_served()并向它传递一个值， 然后再次打印这个值
+restaurant.set_number_served(2000)
+restaurant.guests_number()
+
+#调用方法increment_number_served()，并输出：你认为这家餐馆每天可能接待的就餐人数
+restaurant.increment_number_served(200)
+restaurant.guests_number()
+
+'''9-5 尝试登录次数:在为完成练习 9-3而编写的User类中，添加一个名为login_attempts的属性。
+编写一个名为increment_login_attempts()的方法，它将属性login_attempts 的值加1。 
+再编写一个名为reset_login_attempts( ) 的方法， 它将属性login_attempts 的值重置为0。
+根据User 类创建一个实例，再调用方法increment_login_attempts()多次。
+打印属性login_attempts 的值，确认它被正确地递增；然后调用方法reset_login_attempts()，
+并再次打印属性login_attempts 的值，确认它被重置为0。'''
+
+class User():
+    """一次模拟用户列表的简单尝试"""
+
+    def __init__(self, first_name, last_name,login_attempts,location="Beijing"):
+        """初始化描述用户信息的属性"""
+        self.first_name = first_name
+        self.last_name = last_name
+        self.login_attempts = login_attempts
+        self.location = location
+        self.field = 'Data Mining'
+
+    def describe_user(self):
+        """打印用户信息摘要"""
+        info = self.first_name + " " + self.last_name + "   " + self.location\
+               + "   " + self.field
+        return info.title()
+
+    def greet_user(self):
+        """向用户发出问候"""
+        print("Hello, " + self.first_name.title() + " " +
+              self.last_name.title() + "!")
+
+    def increment_login_attempts(self):
+        """将用户登录次数加1"""
+        self.login_attempts += 1
+
+    def reset_login_attempts(self):
+        """将用户登录次数重新设置为0"""
+        if self.login_attempts != 0:
+            self.login_attempts = 0
+
+#创建实例
+user = User("albert",'einstein',0)
+
+#调用方法
+user.increment_login_attempts()
+print(user.login_attempts)
+user.increment_login_attempts()
+print(user.login_attempts)
+
+user.reset_login_attempts()
+print(user.login_attempts)
+
+'''9-6 冰淇淋小店：冰淇淋小店是一种特殊的餐馆。编写一个名为IceCreamStand的类，
+让它继承你为完成练习 9-1或练习 9-4而编写的Restaurant 类。 
+这两个版本的Restaurant类都可以，挑选你更喜欢的那个即可。
+添加一个名为flavors 的属性， 用于存储一个由各种口味的冰淇淋组成的列表。
+编写一个显示这些冰淇淋的方法。创建一个IceCreamStand 实例， 并调用这个方法。'''
+
+#父类
+class Restaruant():
+    """一次模拟餐馆的简单尝试"""
+
+    def __init__(self, restaurant_name, cuisine_type):
+        """初始化描述餐馆的属性"""
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+        self.number_served = 0
+
+    def describe_restaurant(self):
+        """简单描述餐馆的名字及主营菜品"""
+        print("The " + self.restaurant_name.title() + " is mainly engaged in " +
+              self.cuisine_type + ".")
+
+    def open_restaurant(self):
+        """打印一条消息指出餐馆正在营业"""
+        print("The restaurant is open now.")
+
+    def guests_number(self):
+        """打印一条关于接待客人人数的消息"""
+        print('This restaurant has received ' + str(self.number_served) +
+              " guests.")
+
+    def set_number_served(self, a):
+        """将接待过的客人人数设置为特定的值"""
+        if a >= self.number_served:
+            self.number_served += a
+        else:
+            print("Please try again.")
+
+    def increment_number_served(self, b):
+        """将餐馆接待过的人数增加特定的值"""
+        print("I think " + restaruant.restaurant_name.title() +
+              " can accommodate " + str(b) + " guests today.")
+        self.number_served += b
+
+#子类IceCreamStand
+#方法一：用接受任意个实参的空元组做属性
+
+class IceCreamStand(Restaruant):
+    """冰淇淋小店独特之处"""
+
+    def __init__(self,restaurant_name, cuisine_type,*flavors):
+        """先初始化父类的属性，再初始化冰淇淋店特有的属性"""
+        super().__init__(restaurant_name, cuisine_type)
+        self.flavors = flavors
+
+    def flavors_list(self):
+        """展示冰淇淋列表"""
+        print(self.flavors)
+        for flavor in self.flavors:
+            print(flavor)
+
+
+ice_cream = IceCreamStand("BAXY","Ice Cream",1000,'Vanilla','Strawberry')
+ice_cream.flavors_list()
+
+#方法二：用列表做类IceCreamStand的属性，这样方便增删
+#此时有默认值的number_served要移到最后
+
+class IceCreamStand(Restaruant):
+    """冰淇淋小店独特之处"""
+
+    def __init__(self,restaurant_name, cuisine_type,flavors,number_served=200,):
+        """先初始化父类的属性，再初始化冰淇淋店特有的属性"""
+        super().__init__(restaurant_name, cuisine_type)
+        self.flavors = flavors
+
+    def flavors_list(self):
+        """展示冰淇淋列表"""
+        print(self.flavors)
+        for flavor in self.flavors:
+            print(flavor)
+
+
+flavors_1 = ['Vanilla','Strawberry']
+ice_cream = IceCreamStand("BAXY","Ice Cream",flavors_1,100)
+ice_cream.flavors_list()
+
+'''9-7 管理员：管理员是一种特殊的用户。编写一个名为Admin的类，
+让它继承你为完成练习9-3或练习9-5而编写的User类。添加一个名为privileges 的属性，
+用于存储一个由字符串（如"can add post"、"can delete post"、"can ban user"等）组成的列表。
+编写一个名为show_privileges( ) 的方法，它显示管理员的权限。创建一个Admin实例，并调用这个方法。'''
+
+class User():
+    """一次模拟用户列表的简单尝试"""
+
+    def __init__(self, first_name, last_name, login_attempts,
+                 location="Beijing"):
+        """初始化描述用户信息的属性"""
+        self.first_name = first_name
+        self.last_name = last_name
+        self.login_attempts = login_attempts
+        self.location = location
+        self.field = 'Data Mining'
+
+    def describe_user(self):
+        """打印用户信息摘要"""
+        info = self.first_name + " " + self.last_name + "   " + self.location \
+               + "   " + self.field
+        return info.title()
+
+    def greet_user(self):
+        """向用户发出问候"""
+        print("Hello, " + self.first_name.title() + " " +
+              self.last_name.title() + "!")
+
+    def increment_login_attempts(self):
+        """将用户登录次数加1"""
+        self.login_attempts += 1
+
+    def reset_login_attempts(self):
+        """将用户登录次数重新设置为0"""
+        if self.login_attempts != 0:
+            self.login_attempts = 0
+
+
+class Admin(User):
+    """管理员用户的独特之处"""
+
+    def __init__(
+            self, first_name, last_name, login_attempts,
+            privileges, location="Beijing"):
+        """先初始化父类点的属性，再初始化管理员用户的属性"""
+        super().__init__(first_name, last_name, login_attempts,
+                         location="Beijing")
+        self.privileges = privileges
+
+    def show_privileges(self):
+        """显示管理员的权限"""
+        for privilege in self.privileges:
+            print("You " + privilege + ".")
+
+
+admin_privileges = ["can add post", "can delete post", "can ban user"]
+admin = Admin("albert", 'einstein', 0, admin_privileges)
+admin.show_privileges()
+
+
+'''9-8 权限：编写一个名为Privileges 的类，它只有一个属性——privileges，
+其中存储了练习9-7 所说的字符串列表。 将方法show_privileges( ) 移到这个类中。
+在Admin 类中，将一个Privileges 实例用作其属性。创建一个Admin 实例，
+并使用方法show_privileges( ) 来显示其权限。'''
+
+b = ["can add post", "can delete post", "can ban user"]
+
+class Privileges():
+    """一次模拟权限的简单尝试"""
+
+    def __init__(self):
+        """初始化描述权限的属性"""
+        self.privileges = b
+
+
+    def show_privileges(self):
+        """显示管理员的权限"""
+        for privilege in self.privileges:
+            print("You " + privilege + ".")
+
+
+class User():
+    """一次模拟用户列表的简单尝试"""
+
+    def __init__(self, first_name, last_name, login_attempts,location):
+        """初始化描述用户信息的属性"""
+        self.first_name = first_name
+        self.last_name = last_name
+        self.login_attempts = login_attempts
+        self.location = location
+
+    def describe_user(self):
+        """打印用户信息摘要"""
+        info = self.first_name + " " + self.last_name + "   " + self.location
+        return info.title()
+
+    def greet_user(self):
+        """向用户发出问候"""
+        print("Hello, " + self.first_name.title() + " " +
+              self.last_name.title() + "!")
+
+    def increment_login_attempts(self):
+        """将用户登录次数加1"""
+        self.login_attempts += 1
+
+    def reset_login_attempts(self):
+        """将用户登录次数重新设置为0"""
+        if self.login_attempts != 0:
+            self.login_attempts = 0
+
+
+class Admin(User):
+    """管理员用户的独特之处"""
+
+    def __init__(
+            self, first_name, last_name, login_attempts,location):
+        """先初始化父类点的属性，再初始化管理员用户的属性"""
+        super().__init__(first_name, last_name, login_attempts,location)
+        self.privileges = Privileges()
+
+admin = Admin("albert", 'einstein', 0,"Beijing")
+admin.privileges.show_privileges()
+
+#也可以这样
+#创建一个类Privileges的实例
+c = ["can add post", "can delete post"]
+new_privileges = Privileges(c)
+admin = Admin("albert", 'einstein', 0,"Beijing")
+admin.privileges.show_privileges()
+
+'''9-9 电瓶升级：在本节最后一个electric_car.py版本中，
+给Battery类添加一个名为upgrade_battery( ) 的方法。这个方法检查电瓶容量，
+如果它不是85，就将它设置为85。创建一辆电瓶容量为默认值的电动汽车，调用方法get_range()
+然后对电瓶进行升级，并再次调用get_range()你会看到这辆汽车的续航里程增加了。'''
+
+
+class Battery():
+    """一次模拟电动汽车电瓶的简单尝试"""
+
+    def __init__(self, size=70):
+        """初始化点评的属性"""
+        self.size = size
+
+    def describe_battery(self):
+        """打印一条描述电瓶容量的消息"""
+        print("This car has a " + str(self.size) + "-kwh battery.")
+
+    def get_range(self):
+        """打印一条消息，指出电瓶的续航里程"""
+        if self.size == 70:
+            range = 240
+        elif self.size == 85:
+            range = 270
+
+        message = "This car can go approximately " + str(range)
+        message += " miles on a full charge."
+        print(message)
+
+    def upgrade_battery(self):
+        """将电瓶容量设置为85"""
+        if self.size != 85:
+            self.size = 85
+
+
+# Battery()即可以是类Battery的一个实例
+
+# 父类Car
+class Car():
+    """一次模拟汽车的简单尝试"""
+
+    def __init__(self, make, model, tank_capacity, year=2016):
+        """初始化描述汽车的属性"""
+        self.make = make
+        self.model = model
+        self.tank_capacity = tank_capacity
+        self.year = year
+        self.odometer_reading = 0
+
+    def get_descriptive_name(self, mile, mileage):
+        """返回整洁的描述信息"""
+        long_name = str(self.year) + " " + self.make + " " + self.model + " " + \
+                    " " + str(self.odometer_reading) + " " + str(
+            mile) + " " + str(mileage)
+        return long_name.title()
+
+    def read_odometer(self):
+        """打印一条指出汽车里程的消息"""
+        print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+    def update_odometer(self, mile):
+        """将汽车里程设置为特定的值,并禁止将里程表回调"""
+        if mile >= self.odometer_reading:
+            self.odometer_reading = mile
+        else:
+            print("You can't roll bake an odometer!")
+
+    def increment_odometer(self, mileage):
+        """将里程表增加特定的值"""
+        self.odometer_reading += mileage
+
+    def fill_gas_tank(self):
+        """打印关于汽车油箱的一条信息"""
+        print("This car has a " + str(self.tank_capacity) + "L tank.")
+
+
+# 子类ElectricCar
+# 将一个Battery实例用作ElactricCar类的一个属性
+class ElectricCar(Car):
+    """电动汽车的独特之处"""
+
+    def __init__(self, make, model, tank_capacity, year=2013):
+        """先初始化父类的属性，，再初始化电动汽车的特有属性"""
+        super().__init__(make, model, tank_capacity, year)
+        self.battery_size = Battery()
+
+    # 给子类定义新的方法
+    def describe_battery(self):
+        """打印一条描述电瓶容量的消息"""
+        print("This car has a " + str(self.battery_size) + "-kwh battery.")
+
+    # 重写父类中的方法fill_gas_tank
+    def fill_gas_tank(self):
+        """指出全电动汽车没有油箱"""
+        print("This cas doesn't need a gsa tank.")
+
+
+# 创建实例
+my_tesla = ElectricCar("tesila", "model-L", 70,2016)
+# 调用方法
+my_tesla.battery_size.get_range()
+my_tesla.battery_size.upgrade_battery()
+my_tesla.battery_size.get_range()
+
+'''9-10导入Restaurant类： 将最新的Restaurant 类存储在一个模块中。
+ 在另一个文件中， 导入Restaurant 类， 创建一个Restaurant 实例， 并调用Restaurant的
+ 一个方法， 以确认import语句正确无误。'''
+from restaurant import Restaruant
+
+new_restaurant = Restaruant("BAXY","Ice Cream")
+new_restaurant.describe_restaurant()
+
+'''9-11 导入Admin类： 为完成练习9-8而做的工作为基础，将User、Privileges和Admin类
+存储在一个模块中，再创建一个文件，在其中创建一个Admin 实例
+并对其调用方法show_privileges( )，以确认一切都能正确地运行。 '''
+
+from user3 import Admin
+admin = Admin("albert", 'einstein', 0,"Beijing")
+admin.privileges.show_privileges()
+
+'''9-12多个模块:将User 类存储在一个模块中，并将Privileges和Admin类存储在另一个模块中。
+ 再创建一个文件，在其中创建一个Admin 实例，并对其调用方法show_privileges()，
+ 以确认一切都依然能够正确地运行。'''
+
+#记得在模块Privileges_Admin.py开头写上：from user import User
+
+from Privileges_Admin  import Admin
+admin = Admin("albert", 'einstein', 0,"Beijing")
+admin.privileges.show_privileges()
+
+'''9-13 使用OrderedDict:在练习6-4中，你使用了一个标准字典来表示词汇表。
+请使用OrderedDict类来重写这个程序，并确认输出的顺序与你在字典中添加键—值对的顺序一致。'''
+
+#6.4 词汇表2（使用for遍历）
+print('\n')
+programming_vocabularies = {
+    'rstrip':'deleting trailing spaces',
+    'lstrip':'deleting the opening space',
+    'append':'adding elements at the end of the list',
+    'sort':'permanently sorting of lists',
+    'pop':'deleting the element and then use its value'
+    }
+
+for vocabulary,meaning in programming_vocabularies.items():
+    print('The meaning of '+ vocabulary +' is '+ meaning+'.')
+
+#使用OrderedDict类重写程序
+
+from collections import OrderedDict
+
+programming_vocabularies = OrderedDict()
+
+programming_vocabularies[ 'rstrip'] = 'deleting trailing spaces'
+programming_vocabularies['sort'] = 'permanently sorting of lists'
+programming_vocabularies[ 'lstrip'] = 'deleting the opening space'
+programming_vocabularies['append'] = 'adding elements at the end of the list'
+programming_vocabularies['pop'] = 'deleting the element and then use its value'
+
+for vocabulary,meaning in programming_vocabularies.items():
+    print('The meaning of '+ vocabulary +' is '+ meaning+'.')
+
+'''9-14骰子：模块random包含以各种方式生成随机数的函数，其中的randint()返回一个
+位于指定范围内的整数。例如，下面的代码返回一个1~6内的整数：
+
+from random import randint
+x = randint(1, 6)
+print(x)
+
+请创建一个Die类，它包含一个名为sides的属性，该属性的默认值为6。 
+编写一个名为roll_die( ) 的方法， 它打印位于1和骰子面数之间的随机数。 
+创建一个6面的骰子，再掷10次。创建一个10面的骰子和一个20面的骰子，并将它们都掷10次。'''
+
+class Die():
+    """一次模拟骰子的简单尝试"""
+
+    def __init__(self):
+        """初始化骰子的属性"""
+        self.sides = 6
+
+    def roll_die(self):
+        """打印位于1和骰子面数之间的随机数"""
+        from random import randint
+        x = randint(1, self.sides)
+        print(x)
+
+die_6 = Die()
+die_6.roll_die()
+
+die_6.sides = 10
+die_6.roll_die()
+
+die_6.sides = 20
+die_6.roll_die()
+
+#不要像上面那样，要将import语句写在最前面
+from random import randint
+
+class Die():
+    """一次模拟骰子的简单尝试"""
+
+    def __init__(self):
+        """初始化骰子的属性"""
+        self.sides = 6
+
+    def roll_die(self):
+        """打印位于1和骰子面数之间的随机数"""
+        x = randint(1, self.sides)
+        print(x)
+
+die_6 = Die()
+die_6.roll_die()
+
+die_6.sides = 10
+die_6.roll_die()
+
+die_6.sides = 20
+die_6.roll_die()

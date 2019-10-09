@@ -1,0 +1,238 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/7/3 20:31
+# @Author  : Ting
+# @Site    : 
+# @File    : 5.3&5.4&5.5.py
+# @Software: PyCharm
+
+#5.3.1 简单的 if 语句(适用于只有一个条件测试的情况，记得冒号）
+age=19
+if age>=18:
+    print("You are old enough to vote!")
+#在此语句中if条件不通过，不会有任何输出
+
+#5.3.2 if-else语句（适用于有两个条件测试的情况，记得两个冒号）
+age=17
+if age>=18:
+    print('You are old enough to vote!')
+else:
+    print("Sorry,you are too young to vote!")
+ #Python只总会执行两个操作中的一个代码块
+
+#5.3.3 if-elif-else结构(适用于三个测试条件的情况， Python同样只会执行一个代码块)
+#莫忘两个冒号，而且（仅）最后一个else后无条件，上面的两个语句也符合此规律
+#4岁以下免门票，4-18收费5美元，18岁（含）以上收费10美元
+age=20
+if age<4:
+    print('Your admission cost is $0.')
+elif age<18:
+    print("Your admission cost is $5.")
+else:
+    print('Your admission cost is $10.')
+
+'''注意elif后面写的并不是age>=4 and age<18（变量在前，值在后原则）（而且同EXCEL一样，最好不要写成4<=age<18这种不等式形式）.
+（重要！！！）没提4是因为可以通过测试结果判断：如果第一个条件测试未通过，那么Python就不会打印出其相应的结果，这两个可以互推。
+而且Python还会带着age<4不成立这个结果，接着去进行下一个测试
+写上也可以成立，两种形式均可以，但为了使代码更简洁，选择不写'''
+
+#使上面的代码更简洁
+# 使 if-elif-else 结构的作用更小（只确定门票价格，不做输出任务）
+age=20
+
+if age<4:
+    price=0
+elif age<18:
+    price=5
+else:
+    price=10
+
+print('Your admission cost is $'+str(price)+'.')
+
+#虽然创建了新变量price，但是效率更高而且使代码容易修改。注意将price变量字符串化。
+#用空格使代码更清楚易读
+
+#5.3.4 可根据需要使用任意多个elif代码块(逻辑关系和Python的运营机理要搞清楚，每一个条件都要写对)（记得冒号）
+#在上面三种情况的基础上再加一种：年龄65周岁以上的，门票半价（5美元）
+age=20
+
+if age<4:
+    price=0
+elif age<18:
+    price=5
+elif age<65:
+    price=10
+else:
+    price=5
+
+print('Your admission cost is $'+str(price)+'.')
+
+#5.3.5 为了让代码更清晰和结果更确定，省略else代码块，用elif代替
+#用 elif+条件 代替上面的 else 代码块(记得冒号)
+age=120
+
+if age<4:
+    price=0
+elif age<18:
+    price=5
+elif age<65:
+    price=10
+elif age>=65:
+    price=5
+
+print('Your admission cost is $'+str(price)+'.')
+
+#5.3.6 在if-elif-else语句中：Python
+# 遇到通过了条件的测试后，就会跳过余下的测试。这种行为只能够让程序员测试一个特定的条件，并只执行一个代码块。
+#如果要测试多个条件，运行多个代码块，应该使用一系列独立的if语句。
+list=[1,2,3,4,5]
+if 1 in list:
+    print("Yes!")
+if 3 in list:
+    print("Yes!")
+if 5 in list:
+    print("Yes!")
+
+print("Containing all prime numbers from one to five.")
+
+#5.3练习题
+#5-3
+alien_color="green"
+if alien_color=="green":
+    print("Congratulations,yoou have got five points.")
+
+alien_color="red"
+if alien_color=="green":
+    print("Congratulations,yoou have got five points.")
+
+#5-4
+alien_color="green"
+if alien_color=="green":
+    print("Congratulations,you have got five points.")
+else:
+    print("Congrtulations,you have got ten points.")
+
+alien_color="red"
+if alien_color=="green":
+    print("Congratulations,you have got five points.")
+else:
+    print("Congrtulations,you have got ten points.")
+
+#5-5
+alien_color="green"
+
+if alien_color=="green":
+    mark=5
+elif alien_color=="yellow":
+    mark=10
+elif alien_color=="red":
+    mark=15
+
+print("Congratulations,you'have got "+str(mark)+" points.")
+
+#5-6
+#做提前先画图
+age=24
+
+if age<2:
+    period='a Baby.'
+elif age<4:
+    period='toddling.'
+elif age<13:
+    period=' a child.'
+elif age<20:
+    period=' a teenager.'
+elif age<65:
+    period=' a adult.'
+elif age>=65:
+    period=' a senior citizens.'
+
+print("You are"+period)
+
+#5.4 使用if语句处理列表
+#5.4.1 检查特殊元素（使用for循环与if-else结构）
+requested_toppings=['mushrooms','green peppers','extra cheese']
+
+for requested_topping in requested_toppings:
+    if requested_topping == 'green peppers':
+        print('Sorry,we are out of green peppers right now.')
+    else:
+        print('Adding '+requested_topping)
+
+print('\nFinished making your pizza!')
+
+#5.4.2 确定列表不是空的
+requested_toppings=[]
+
+if requested_toppings:
+    for requested_topping in requested_toppings:
+        print('Adding '+requested_topping)
+    print("\nFinished making your pizza!")
+else:
+    print("Are you sure you want a plain pizza?")
+
+#5.4.3 使用多个列表
+avaliable_toppings=['m','o','g','p','e']
+requested_toppings=['m','f','e']
+
+for requested_topping in requested_toppings:
+    if requested_topping in avaliable_toppings:
+        print('Adding '+requested_topping)
+    else:
+        print("Soory,we don't have "+requested_topping+'.')
+
+print('\nFinished making your pizza!')
+
+#5.4练习题
+#5-8
+users=['admin','Eric','Join','Mary','Alex']
+
+for user in users:
+    if user=='admin':
+        print('Hello adimin,would you like to see a status report?')
+    else:
+        print('Hello '+user+',thank you for logging in again.')
+
+#5-9（通过这道题要明白代码的嵌套，扩展原理，即将5-8的代码嵌套进入5-9）
+#回答第一问：添加一条if语句，如果列表为空，就打印消息'We need to find some users!'
+#就是将前面的代码作为内部的一部分结构，在其最前面和最后面添加出一条完整的if代码来
+#现已知列表肯定不为空，所以只要在前面加上：if users 即可，而与这个if对应的else就应该为题目中所要求的的那样
+
+users=['admin','Eric','Join','Mary','Alex']
+
+if users:
+    for user in users:
+        if user == 'admin':
+            print('Hello adimin,would you like to see a status report?')
+        else:
+            print('Hello ' + user + ',thank you for logging in again.')
+else:
+    print('We need to find some users!')
+
+#回答第二问：删除列表中的所有元素（利用切片的概念），再次执行上面的代码，已确认通过上面的代码当列表中空时，确实会输出消息：'We need to find some users!'
+del users[:]
+if users:
+    for user in users:
+        if user == 'admin':
+            print('Hello adimin,would you like to see a status report?')
+        else:
+            print('Hello ' + user + ',thank you for logging in again.')
+else:
+    print('We need to find some users!')
+
+#5-10
+current_users=['a','b','c','d','E']
+new_users=['f','D','g','h','e']
+
+for new_user in new_users:
+    if new_user.lower() in current_users:
+        print('\nThis username "'+ new_user +'" already in use.')
+        print('Please enter another username.')
+    elif new_user.upper() in current_users:
+        print('\nThis username" '+ new_user +'" already in use.')
+        print('Please enter another username.')
+    else:
+        print('\nThe username " '+ new_user +'" is not used.')
+
+
+

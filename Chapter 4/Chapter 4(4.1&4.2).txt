@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/6/27 18:23
+# @Author  : Ting
+# @Site    : 
+# @File    : 4.1&4.2--for循环.py
+# @Software: PyCharm
+
+#用for遍历整个列表，并进行一些操作
+magicians=['alice','david','carolina']
+for magician in magicians:
+    print(magician)
+    #注意缩进
+    print(magician.title()+",that was a great trick!")
+    print("I can't wait to see your next trick,"+magician.title()+".\n")
+print("Thanks,everyone.That was a great magic show!")
+
+#用for遍历整个列表，并进行一些操作--练习
+pizzas=['New York Style','Chicago Style','California Style']
+for pizza in pizzas:
+    print(pizza)
+    print("I like "+pizza.title()+" pizza.\n")
+print("I really love pizza!")
+
+#代码中换行只认换行符\n
+#title函数可以将每个单词的首字母都大写
+message="abcd efgh"
+print(message.title())

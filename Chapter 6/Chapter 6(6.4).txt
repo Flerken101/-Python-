@@ -1,0 +1,103 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/7/7 13:46
+# @Author  : Ting
+# @Site    : 
+# @File    : Chapter 6（6.4）.py
+# @Software: PyCharm
+
+# 6.4.1字典列表（字典中嵌套着列表）
+alien_0={'color':'green','point':5}
+alien_1={'color':'yellow','point':10}
+alien_2={'color':'red','point':15}
+
+aliens=[alien_0,alien_1,alien_2]
+
+for alien in aliens:
+    print(alien)
+
+# 有30个外星人的情况
+#创建一个新的空列表
+print('\n')
+aliens = []
+# 循环创建字典并添加进列表
+for alien_number in range(30):
+    new_alien ={'color':'green','points':5,'speed':'slow'}
+    aliens.append(new_alien)
+#显示前五个列表字典元素
+for alien in aliens[:5]:
+    print(alien)
+print('...')
+#显示创建了多少个外星人
+print('The number of aliens are ' + str(len(aliens))+'.')
+
+#将前三个的外星人颜色改成黄色的
+for alien in aliens[0:3]:
+    if  alien['color'] == 'green':
+        alien['color'] = 'yellow'
+        alien['points'] = '10'
+        alien['speed'] = 'medium'
+#显示前5个外星人列表（下面这种的还是显示为列表）
+print('\n')
+print(aliens[:5])
+#不以列表形式显示前五个（用for循环）
+print('\n')
+for alien in aliens[0:5]:
+    print(alien)
+
+#6.4.2 在字典中储存列表
+#储存所点比萨的信息
+pizza = {'crust':'thick',
+         'toppings':['mushroom','extra cheese'],
+         }
+
+#概述所点的比萨
+print('\n')
+print('You ordered a ' + pizza['crust'] + '-crust pizza'+
+      'with the following toppings:')
+
+for topping in pizza['toppings']:
+    print('\t' + topping)
+
+#当每个键都关联多个值时，可以每个键都关联一个列表
+print('\n')
+favorite_languages = {
+    'jen':['python','ruby'],
+    'sarah':['c'],
+    'edward':['ruby','go'],
+    'phil':['python','haskell']
+    }
+
+for name,languages in favorite_languages.items():
+    if len(languages) == 1:
+        a='is'
+    elif  len(languages) > 1:
+        a='are'
+    print(name.title() + "'s favorite language " + a +':')
+    for language in languages:
+        print('\t'+language.title())
+
+
+#6.4.3 在字典中储存字典
+users = {'aeinstein':{
+            'first':'albert',
+            'last':'einstein',
+            'location':'princeton'
+            },
+        'mcurie':{
+            'first':'marie',
+            'last':'curie',
+            'location':'paris'
+            }
+        }
+
+for username,user_info in users.items():
+    print('\nUsername : ' + username)
+    #先定义一个变量再大写
+    full_name = user_info['first'] + ' '+user_info['last']
+    print('\tFull name : '+ full_name.title())
+    # 先定义一个变量再大写
+    location = user_info['location']
+    print('\tLocation : '+ location.title())
+
+

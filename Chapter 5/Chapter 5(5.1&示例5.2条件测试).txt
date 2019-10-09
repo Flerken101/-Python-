@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/6/30 15:30
+# @Author  : Ting
+# @Site    : 
+# @File    : 5.2条件测试.py
+# @Software: PyCharm
+
+#5.1--if循环语句简单示例
+#结合for循环
+cars=['audi','bmw','subaru','toyota']
+for car in cars:
+    if car=='bmw':
+        print(car.upper())
+    else:
+        print(car.title())
+
+
+#5.2条件测试
+#5.2.1检查是否相等
+car='bmw'
+car=='bmw'
+car=="audi"
+
+#5.2.2检查是否相等时不考虑大小写
+#实际在Python中检查时会考虑大小写，如下
+car='Audi'
+car=='audi'
+#但如果大小写无关紧要，只想检查值是否相等，可将变量的值转化为小写（常常是这样）
+# q且不会不改变原变量的大小写格式
+car.lower()=='audi'
+
+#5.2.3检查是否不相等
+#！表示“不”，！=的组合表示不等（大多数语言都是如此）
+requested_topping='mushrooms'
+if 'anchovies'!=requested_topping:
+    print("Hold the anchovies!")
+#'anchovies'与requested_topping可交换位置，但一般是变量名在前，所以应该为：
+if requested_topping!= 'anchovies':
+    print("Hold the anchovies!")
+
+#5.2.4比较数字
+age=18
+age==18
+age<=18
+
+#5.2.5检查多个条件
+age_1=18
+age_2=22
+#为方便阅读，可将每个条件都放在括号中，但并非必须
+#使用and：多个条件同时满足时，返回Ture
+(age_1>14) and (age_2>14)
+#使用or：只要有一个条件满足时即可返回Ture
+(age_1>14) or (age_2>30)
+
+#特别注意：每次只能定义一个变量，不能同时定义多个，比如：age_1=18，age_2=22
+#最好不要忘了括号与下一个或前一个字符间的空格，如：(age_1>14) and (age_2>14)
+#5.2.6 用 in 检查特定值是否包含在列表中
+cars=['audi','bmw','subaru','toyota']
+"subaru"in cars
+
+#5.2.7 用 not in 检查特定值是否不包含在列表中
+cars=['audi','bmw','subaru','toyota']
+"subaru"not in cars
+
+'''布尔表达式是条件测试的别称，就是值为True或者为False的一种Python的表达式，常用语跟踪程序状态或程序中重要的条件方面。
+条件语句和循环语句都使用布尔表达式作为条件，布尔值为真或假，以False和True表示
+使用布尔表达式用该记住真值表'''
+
+#5.2练习题
+a=1
+print("Is a=1? I predict Ture")
+#下面这种方式可以在Pycharm中输出Ture或者False,括号中的表达式就叫布尔表达式。
+#切记：不要把此处的print看做函数，而应该把括号中的表达式就叫布尔表达式
+print(a==1)
+
+#使用函数lower()的测试
+b="A"
+print(b.lower()=="a")
+#包含 and 的测试
+print(b.lower()=="a" and a==1)
+#包含 or 的测试
+print(b.lower()=="a" or a==2)
+

@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/6/29 16:22
+# @Author  : Ting
+# @Site    : 
+# @File    : 4.4使用列表的一部分&元组.py
+# @Software: PyCharm
+
+#4.4.1切片
+#python中多行注释用三对单引号或双引号表示，如下
+"""①输出列表的前三名成员
+②首先明白列表中元素索引的差一行为，其次要明白返回的是从第一个索引到第二个索引之前的元素，并不包含第二个索引处的元素（这一点同range函数相同,但range返回的是数字）
+  注意思考方式，这两点都要考虑到
+③输出结果也是一个列表"""
+players=['charles','martina','michael','florence','eli']
+#打印第一个至第三个元素（0可省略）
+print(players[0:3])
+
+#提取列表的第2至4个元素
+players=['charles','martina','michael','florence','eli']
+print(players[1:4])
+
+#不指定第一个索引，从列表开头开始提取
+#提取到第三个元素停止（观察最后要提取的元素位置（没有差一行为时的位置，即单纯的第几个）与切片中第二个索引的规律）
+players=['charles','martina','michael','florence','eli']
+print(players[:3])
+
+#不指定第二个索引，提取到列表末尾结束
+#提取第三个及其之后的所有元素
+players=['charles','martina','michael','florence','eli']
+print(players[2:])
+
+#用负数索引返回列表的末尾元素
+#返回列表的最后三个元素，从倒数第三个开始提取直到结束
+players=['charles','martina','michael','florence','eli']
+print(players[-3:])
+
+#4.4.2遍历切片
+#依旧使用for循环，记得冒号
+players=['charles','martina','michael','florence','eli']
+for value in players[1:3]:
+    print(value)
+
+#4.4.3复制列表（P56下，最重要的是明白原理）
+# 列表例子与书上不同
+my_players=['charles','martina','michael','florence','eli']
+#利用切片概念复制列表
+friend_players=my_players[:]
+print(my_players)
+print(friend_players)
+
+#分别给原列表及利用切片复制得到的列表添加元素
+#最后得到的两列表并不相同
+my_players.append('Hakeem')
+friend_players.append('Kenny')
+print(my_players)
+print(friend_players)
+
+#区别：将列表赋给另一个列表，创建连等关系并分别添加新元素，见P57上笔记
+#会发现他俩相同
+friend_players=my_players
+my_players.append('Hakeem')
+friend_players.append('Kenny')
+print(my_players)
+print(friend_players)
+
+#4.5元组--不可变的列表称为元组，区别列表，用圆括号来标识
+#创建一个元组并且用for循环遍历其元素
+buffet_menu=('salad','hum','chicken','egg','crab')
+for dish in buffet_menu:
+    print(dish)
+
+#尝试：修改元组中的元素，python会拒绝（类型错误）
+#记住怎么修改：想用元组名称及索引号访问再赋值，列表也一样但不会报错
+buffet_menu[0]='beetroot'
+
+#修改元组变量：创建一个新的元组，名称保持不变，修改需要修改的变量值
+#修改菜单中的两种菜品（hum改为cheese，crab改为sardines）
+#这是原元组
+buffet_menu=('salad','hum','chicken','egg','crab')
+#修改要改的菜肴
+buffet_menu=('salad','cheese','chicken','egg','sardines')
+#遍历元素用for遍历整个(冒号),用切片遍历部分，用元组名称与索引号遍历单个
+#练习①：用切片输出中间三个
+print(buffet_menu[1:4])
+#练习②：分别输出首尾两个元素
+print(buffet_menu[0])
+print(buffet_menu[4])

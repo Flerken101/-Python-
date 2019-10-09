@@ -1,0 +1,194 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/7/10 22:19
+# @Author  : Ting
+# @Site    : 
+# @File    : Chapter 7练习题.py
+# @Software: PyCharm
+
+#7.1 汽车租赁
+message = input('Please tell me the kind of car you want to rent:  ')
+print('Let me see if I can find you a '+ message.title() + '.')
+
+#7.2 餐馆订位
+number = input('How many do you have in your party,please? ')
+number = int(number)
+if number >= 8:
+    print('Sorry, there are no available seats. ')
+else:
+    print('OK, there are seats available now.')
+
+#7-3 10的整数倍：让用户输入一个数，并指出这个数字是否是10的整数倍
+number = input('Please give me a number: ')
+number = int(number)
+if number % 10 == 0:
+    print('The number ' + str(number) + ' is an integer multiple of 10.')
+else:
+    print('The number ' + str(number) + ' is not an integer multiple of 10.')
+
+
+#由于不够熟悉，习题7-4，5做了两遍（第一遍）
+# 7-4 比萨配料:编写一个循环，提示用户输入一系列的比萨配料，并在用户输入'quit' 时结束循环。
+# 每当用户输入一种配料后，都打印一条消息，说我们会在比萨 中添加这种配料。
+tips = 'Please order what toppings do you want: '
+#使toppings为空值的唯一作用就是让程序能够进入while循环
+toppings = ''
+while toppings != 'quit':
+    toppings = input(tips)
+    if toppings != 'quit':
+        print(toppings)
+#不加if语句，就会在输入quit时也将其作为配料打印出来，所以要在input和print之间加入if
+#只有输入的不为quit才打印
+
+'''7-5 电影票：有家电影院根据观众的年龄收取不同的票价：
+不到3岁的观众免费；3~12岁的观众为10美元；超过12岁的观众为15美元。
+请编写一个循环，在其中询问用户的年龄，并指出其票价。'''
+#正常人不会在提示输入年龄的时候输入文字
+active = True
+while active:
+    age = input('How ald are you? ')
+    age = int(age)
+    if age < 3:
+        fee = 0
+    elif age <= 12:
+        fee = 10
+    elif age > 12:
+        fee = 15
+    print('You need to pay $'+ str(fee) + ' for the ticket.' )
+
+#7-4 比萨配料:编写一个循环，提示用户输入一系列的比萨配料，并在用户输入'quit' 时结束循环。
+# 每当用户输入一种配料后，都打印一条消息，说我们会在比萨中添加这种配料。（第二遍）
+
+tips = 'Please order toppings what you want.'
+actieve = True
+while actieve:
+    toppings = input(tips)
+    if toppings == 'quit':
+        break
+    print('OK,we will add the'+ toppings + 'in pizza.')
+
+#7-5 电影票
+'''有家电影院根据观众的年龄收取不同的票价：
+不到3岁的观众免费；3~12岁的观众为10美元；超过12岁的观众为15美元。
+请编写一个循环，在其中询问用户的年龄，并指出其票价。'''
+
+tips = 'Please enter your age: '
+active = True
+while active:
+    age = input(tips)
+    age = int(age)
+    if age >0 and age < 3:
+        print('Yor are free of ticket.')
+    elif age >0 and age <=12:
+        print('You need pay $10 for the ticket.')
+    elif age > 12:
+        print('You need pay $15 for the ticket.')
+    elif age < 0:
+        active = False
+
+#7-6 三个出口：以另一种方式完成练习7-5，在程序中采取如下所有做法。
+#使用变量active 来控制循环结束的时机。（已实现）
+#在while 循环中使用条件测试来结束循环。（已实现）
+
+#使用break 语句在用户输入'quit' 时退出循环。(其实本程序在输入quit和小于零的数字时均可退出)
+tips = 'Please enter your age: '
+active = True
+while active:
+    age = input(tips)
+    if age == 'quit':
+        break
+    age = int(age)
+    if age >0 and age < 3:
+        print('Yor are free of ticket.')
+    elif age >0 and age <=12:
+        print('You need pay $10 for the ticket.')
+    elif age > 12:
+        print('You need pay $15 for the ticket.')
+    elif age < 0:
+        active = False
+
+#7-7 无限循环：编写一个没完没了的循环， 并运行它
+# （要结束该循环， 可按Ctrl +C，也可关闭显示输出的窗口）。
+#专门写一个bug
+x = 1
+while x <= 5:
+    print(x)
+
+#改正（输出1到5）
+x = 1
+while x <= 5:
+    print(x)
+    x += 1
+
+'''7-8 熟食店：： 创建一个名为sandwich_orders 的列表， 在其中包含各种三明治的名字；
+再创建一个名为finished_sandwiches 的空列表。遍历列表sandwich_orders
+对于其中的每种三明治，都打印一条消息，如I made your tuna sandwich ，
+并将其移到列表finished_sandwiches 。
+所有三明治都制作好后， 打印一条消息， 将这些三明治列出来。'''
+
+sandwich_orders = ['Sloppy Joe','Reuben','Meatball','Italian','Tunafish']
+finished_sandwiches = []
+while sandwich_orders:
+    finished_sandwiche = sandwich_orders.pop()
+    print('I made your ' + finished_sandwiche + ' Sandwich.')
+    finished_sandwiches.append(finished_sandwiche)
+
+print(sandwich_orders)
+print(finished_sandwiches)
+
+print('\nYour sandwiches have been made: ')
+for finished_sandwiche in finished_sandwiches:
+    print(finished_sandwiche)
+
+'''7-9 五香烟熏牛肉卖完了： 使用为完成练习 7-8而创建的列表sandwich_orders ，
+并确保'pastrami'在其中至少出现了三次。
+在程序开头附近添加这样的代码：打印一条消息， 指出熟食店的五香烟熏牛肉卖完了；
+再使用一个while 循环将列表sandwich_orders 中的' pastrami' 都删除。
+确认最终的列表finished_sandwiches 中不包含' pastrami' 。'''
+
+sandwich_orders = ['Sloppy Joe', 'pastrami', 'Meatball', 'pastrami', 'Tunafish',
+                   'pastrami']
+finished_sandwiches = []
+
+print('Pastrami is sold out today.')
+while 'pastrami' in sandwich_orders:
+    sandwich_orders.remove('pastrami')
+
+print('\n')
+while sandwich_orders:
+    finished_sandwiche = sandwich_orders.pop()
+    print('I made your ' + finished_sandwiche + ' Sandwich.')
+    finished_sandwiches.append(finished_sandwiche)
+
+print('\n')
+print(sandwich_orders)
+print(finished_sandwiches)
+
+print('\nYour sandwiches have been made: ')
+for finished_sandwiche in finished_sandwiches:
+    print(finished_sandwiche)
+
+'''7-10 梦想的度假胜地：编写一个程序，调查用户梦想的度假胜地。
+使用类似于“Ifyou could visit one place in the world, where would you go?”的提示，
+ 并编写一个打印调查结果的代码块。'''
+
+#应该使用字典存储信息
+responses = {}
+
+polling_active = True
+while polling_active:
+    #请被调查者输入姓名和梦想中的度假胜地
+    name = input("\nWhat's your name? ")
+    holiday_resort = input("Which holiday resort would you like to visit? ")
+
+    #将调查信息储存在字典中
+    responses[name] = holiday_resort
+
+    #询问是否还有其他人参与调查
+    repeat = input('Would you like to let another person respond? (yes/no)')
+    if repeat == 'no':
+        polling_active = False
+
+print('\n---Poll Result---')
+for name,holiday_resort in responses.items():
+    print(name + "would like to " + holiday_resort + '.')

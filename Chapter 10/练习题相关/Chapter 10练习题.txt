@@ -1,0 +1,331 @@
+#!/usr/bin/python
+# -*- coding:utf8 -*-
+
+'''10-1 Python学习笔记：在文本编辑器中新建一个文件， 写几句话来总结一下你至此学到的
+Python知识，其中每一行都以“In Python you can”打头。 将这个文件命名
+为learning_python.txt， 并将其存储到为完成本章练习而编写的程序所在的目录中。
+编写一个程序，它读取这个文件，并将你所写的内容打印三次：第一次打印时读取整个文件；
+第二次打印时遍历文件对象；第三次打印时将各行存储在一个列表中,再在with代码块外打印它们。'''
+
+#第一次打印时读取整个文件
+with open("learning_python.txt") as file_object:
+    content = file_object.read()
+    print(content)
+
+#第二次打印时遍历文件对象
+with open("learning_python.txt") as file_object:
+    for line in file_object:
+        print(line)
+
+#第三次打印时将各行存储在一个列表中，再在with代码块外打印它们
+with open("learning_python.txt") as file_object:
+    lines = file_object.readlines()
+
+for line in lines:
+    print(line.strip())
+
+
+'''10-2 C语言学习笔记:可使用方法replace()将字符串中的特定单词都替换为另一个单词。 
+下面是一个简单的示例，演示了如何将句子中的'dog'替换为'cat':
+>>> message = "I really like dogs. "
+>>> print(message. replace(' dog' , ' cat' ))
+' I really like cats. '
+
+读取你刚创建的文件learning_python.txt中的每一行，
+将其中的Python都替换为另一门语言的名称， 如C。 将修改后的各行都打印到屏幕上。'''
+
+with open("learning_python.txt") as file_object:
+    lines = file_object.readlines()
+
+for line in lines:
+    new_line =line.replace("Python","C")
+    print(new_line.strip())
+
+#10-3访客：编写一个程序，提示用户输入其名字；用户作出响应后，将其名字写入到文件guest.txt中。
+
+username = input("What's your name? ")
+
+with open("guest.txt","w") as file_object:
+    file_object.write(username)
+
+'''10-4访客名单：编写一个while循环，提示用户输入其名字。用户输入其名字后，
+在屏幕上打印一句问候语，并将一条访问记录添加到文件guest_book.txt中。
+确保这个文件中的每条记录都独占一行。'''
+#要先建立一个空文件guest_book.txt
+
+while True:
+    guest_name = input("Please enter your name: ")
+    if guest_name == "q":
+        break
+    else:
+        # with代码块在后，存入第一个名字时就会在第首行产生空行（Why?）
+        with open("guest_book.txt","a") as file_object:
+            file_object.write(guest_name + "\n")
+        print("Hello," + guest_name + "!")
+
+#当第一次输入时没有空文件时(考虑 FileNotFoundError 异常)
+
+while True:
+    guest_name = input("Please enter your name: ")
+    if guest_name == "q":
+        break
+    else:
+        try:
+            with open("guest_book.txt") as file_object:
+                file_object.write(guest_name + "\n")
+        except FileNotFoundError:
+            with open("guest_book.txt","w") as file_object:
+                file_object.write(guest_name + "\n")
+
+    print("Hello," + guest_name + "!")
+
+'''10-5 关于编程的调查：编写一个while循环，询问用户为何喜欢编程。
+每当用户输入一个原因后， 都将其添加到一个存储所有原因的文件中。'''
+
+while True:
+    reason = input('why do you like coding? ')
+    if reason == "no why":
+        break
+    else:
+        try:
+            with open("reasons.txt","a") as file_reason:
+                file_reason.write(reason + "\n")
+        except FileNotFoundError:
+            with open("reasons.txt","w") as file_reason:
+                file_reason.write(reason + "\n")
+        else:
+            print(reason)
+
+'''10-6 加法运算：提示用户提供数值输入时，常出现的一个问题是：用户提供的是文本而不是数字。
+在这种情况下，当你尝试将输入转换为整数时，将引发TypeError异常。 
+编写一个程序，提示用户输入两个数字，再将它们相加并打印结果。
+在用户输入的任何一个值不是数字时都捕获TypeError 异常，并打印一条友好的错误消息。
+对你编写的程序进行测试：先输入两个数字，再输入一些文本而不是数字。'''
+
+'''typeerror：函数或方法接受了不适当的【类型】的参数，比如sum('nick')，sum函数不接受字符串类型；
+valueerror：函数或方法虽然接受了正确的【类型】的参数，但是该参数的【值】不适当，
+比如int('nick')，int函数可以接受字符串类型，但是'nick'字符串不具备表示一个整数的含义。
+
+'''
+
+#sum函数的用法
+print(sum([1,2,3]))
+
+#输入一个数字它的类型是整数
+a=5
+print(type(a))
+
+#以下过程可以正常运行
+a = 2
+b = 5
+print(sum([a,b]))
+
+#以下过程会出现TypeError异常（因为函数sum接受了不适当的【类型】的参数）
+c = "m"
+b=2
+
+#使用函数input()时，Python将用户输入解读为字符串
+
+print(sum([c,b]))
+
+#本题答案
+#因为用sum之前必须先用int()，所以如果要出现异常一定是valueerror先出现，所以就直接捕获valueerror异常即可
+print("Give me two numbers,and I will add them.")
+print("enter 'q' to quit.")
+
+while True:
+    first_number = input("\nFirst Name: ")
+    if first_number == "q":
+        break
+    second_number = input("Second Name: ")
+    if second_number == "q":
+        break
+
+
+    try:
+        answer = sum([int(first_number), int(second_number)])
+    except ValueError:
+        print("Please enter numeric digits!")
+    else:
+        print(answer)
+
+'''10-7加法计算器：将你为完成练习 10-6 而编写的代码放在一个 while 循环中，让 
+用户犯错（输入的是文本而不是数字）后能够继续输入数字。'''
+
+#在10-6的程序中已实现
+
+'''10-8 猫和狗：创建两个文件cats.txt和dogs.txt，在第一个文件中至少存储三只猫的名字，
+在第二个文件中至少存储三条狗的名字。编写一个程序，尝试读取这些文件，
+并将其内容打印到屏幕上。将这些代码放在一个try-except 代码块中，
+以便在文件不存在时捕获FileNotFound 错误， 并打印一条友好的消息。
+将其中一个文件移到另一个地方， 并确认except 代码块中的代码将正确地执行。'''
+
+with open("cats.txt")  as file_object:
+    content = file_object.read()
+    print(content)
+
+#将dogs.txt删掉
+fliename = "dogs.txt"
+try:
+    with open(fliename)  as file_object:
+        content = file_object.read()
+except FileNotFoundError:
+    print("The file "+ fliename + " does not exist.")
+else:
+    print(content)
+
+#将dogs.txt移到其他文件夹，使用绝对路径打开
+
+file_path = 'D:\PyCharm\other_files\dogs.txt'
+
+with open(file_path) as file_object:
+    content = file_object.read()
+    print(content)
+
+#10-9 沉默的猫和狗：修改你在练习10-8中编写的except代码块，让程序在文件不存在时一言不发。
+
+filename = "dogs.txt"
+
+try:
+    with open(filename) as file_object:
+        content = file_object.read()
+except FileNotFoundError:
+    pass
+else:
+    print(content)
+
+'''10-10 常见单词：访问项目Gutenberg（http://gutenberg.org/），并找一些你想分析的图书。 
+下载这些作品的文本文件或将浏览器中的原始文本复制到文本文件中。
+你可以使用方法count()来确定特定的单词或短语在字符串中出现了多少次。 
+例如，下面的代码计算'row'在一个字符串中出现了多少次：
+
+>>> line = "Row, row, row your boat"
+>>> line.count('row')
+2 >
+>> line.lower().count('row')
+3?
+
+请注意，通过使用lower()将字符串转换为小写，可捕捉要查找的单词出现的所有次数，而不管其大小写格式如何。
+编写一个程序，它读取你在项目Gntenberg中获取的文件，并计算单词"the"在每个文件中分别出现了多少次。'''
+
+#用英语作文代替
+
+#这里必须要用read()函数读取文件中的内容
+with open("composition.txt") as file_object:
+    content = file_object.read()
+    """计算文件中大致一共包含多少个单词"""
+    words = content.split()
+    num_words = len(words)
+    print("The file composition.txt has about " + str(num_words) + " words.")
+
+#而这里因为要对文件对象进行操作，所以反而不能使用read()函数读取
+    the_num = 0
+with open("composition.txt") as file_object:
+    """计算文件中共有多少个the"""
+    for line in file_object:
+        the_num += line.lower().count('the')
+    print(the_num)
+
+
+#read()函数，一次读取文件的全部内容，将文本文件的全部内容看作一个长的字符串
+#split()函数是将一个字符串分裂成多个字符串组成的列表
+'''file_object可以理解成变量名或者标签,它指向你打开的文件(缓冲区),
+你通过这个变量进行操作,它接受的是open函数的返回值'''
+
+'''file_object储存的是一个表示文件的对象，所以可以直接用for line in file_object
+去逐行读取文件。
+而split()函数的操作对象不是文件，而是文件中的内容，所以要先用read()函数一次性读取文件中
+的内容并储存在content变量中。'''
+
+'''10-11喜欢的数字：编写一个程序，提示用户输入他喜欢的数字，并使用json.dump(),
+将这个数字存储到文件中。再编写一个程序，从文件中读取这个值，并打印消息
+“I know your favorite number! It's _____.”。'''
+
+#先存储
+import json
+
+favorite_number = input("What's your favorite number? ")
+filename = "favorite_number.txt"
+
+with open(filename,"w") as file_object:
+    json.dump(favorite_number,file_object)
+
+#再读取
+import json
+
+filename = "favorite_number.txt"
+
+with open(filename) as file_object:
+    favorite_number = json.load(file_object)
+
+print("I know your favorite number! It's " + str(favorite_number) + ".")
+
+
+'''10-12记住喜欢的数字：将练习10-11中的两个程序合而为一。如果存储了用户喜欢的数字，
+就向用户显示它，否则提示用户输入他喜欢的数字并将其存储到文件中。
+运行这个程序两次，看看它是否像预期的那样工作。'''
+
+import json
+
+
+def favorite_number():
+    try:
+        with open("favorite_number.txt") as file_object:
+            favorite_number = json.load(file_object)
+    except FileNotFoundError:
+        favorite_number = input("What's your favorite number? ")
+        with open("favorite_number.txt", "w") as file_object:
+            json.dump(favorite_number, file_object)
+    else:
+        print("I know your favorite number! It's " + str(favorite_number) + ".")
+
+
+favorite_number()
+
+'''10-13 验证用户：最后一个remember_me.py版本假设用户要么已输入其用户名，
+要么是首次运行该程序。我们应修改这个程序，以应对这样的情形： 
+当前和最后一次运行该程序的用户并非同一个人。为此，在greet_user()中打印欢迎用户
+回来的消息前，先询问他用户名是否是对的。如果不对，就调用get_new_username()让用户输入正确的用户名。'''
+
+import json
+
+
+def get_stored_username():
+    """如果储存了用户名，就获取它"""
+    try:
+        with open("username.json") as file_object:
+            username = json.load(file_object)
+    except FileNotFoundError:
+        return None
+    else:
+        return username
+
+
+def get_new_username():
+    """提示用户输入用户名"""
+    username = input("What's your name? ")
+    filename = "username.json"
+    with open(filename, "w") as file_object:
+        json.dump(username, file_object)
+    return username
+
+
+def greet_user():
+    """问候用户，并指出其名字"""
+    username = get_stored_username()
+    if username:
+        print("Is your username " + username.title() +"? ")
+        repeat = input("yes or no? \n")
+        if repeat == "yes":
+            print("Welcome back," + username + "!")
+        else:
+            username = get_new_username()
+            print("We will remember you when you conme back," + username + "!")
+    else:
+        username = get_new_username()
+        print("We will remember you when you conme back," + username + "!")
+
+
+greet_user()
+
+

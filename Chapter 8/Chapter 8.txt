@@ -1,0 +1,376 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/7/15 18:28
+# @Author  : Ting
+# @Site    : 
+# @File    : Chapter 8.py
+# @Software: PyCharm
+
+#8.1定义函数
+def greet_user():
+    """显示简单的问候语"""
+    print('Hello!')
+
+greet_user()
+
+#像函数传递信息
+def greet_user(username):
+    """显示简单的问候语"""
+    print('Hello, '+ username.title() + ".")
+
+greet_user('jesse')
+
+#8.1.2 实参和形参
+'''形参：username
+    实参：jesse'''
+
+#8.2.1位置实参
+def describe_pet(animal_type,pet_name):
+    """显示宠物的信息"""
+    print("\nI have a " + animal_type + '.')
+    print("My " + animal_type + "'s name is "+pet_name.title() + "." )
+
+describe_pet("cat","Ballball")
+
+#调用函数多次（可以根据需要调用函数任意次）
+describe_pet("hamster","harry")
+describe_pet("dog","willie")
+
+#位置实参的顺序很重要
+describe_pet("willie","dog")
+
+#8.2.2关键字实参
+def describe_pet(animal_type,pet_name):
+    """显示宠物的信息"""
+    print("\nI have a "+ animal_type + ".")
+    print("My "+animal_type  + "'s is " + pet_name.title() + ".")
+
+describe_pet(animal_type = "dog",pet_name = "willie")
+
+#8.2.3默认值
+#注意：与上面相比，调换了两形参的顺序,然后指定了动物类型的默认值
+def describe_pet(pet_name,animal_type="dog"):
+    """显示宠物的信息"""
+    print("\nI have a "+ animal_type + ".")
+    print("My "+animal_type  + "'s is " + pet_name.title() + ".")
+
+describe_pet(pet_name="willie")
+describe_pet('willie')
+
+#如果不修改两参数位置会发生什么
+def describe_pet(animal_type="dog",pet_name):
+    """显示宠物的信息"""
+    print("\nI have a "+ animal_type + ".")
+    print("My "+animal_type  + "'s is " + pet_name.title() + ".")
+
+describe_pet(pet_name="willie")
+#提示出现语法错误，所以指定形参的默认值必须将该形参放在最后
+
+#可以通过重新指定实参，修改形参的默认值
+def describe_pet(pet_name,animal_type="dog"):
+    """显示宠物的信息"""
+    print("\nI have a "+ animal_type + ".")
+    print("My "+animal_type  + "'s is " + pet_name.title() + ".")
+
+describe_pet(animal_type = "hamster",pet_name = "harry")
+#关键字实参的顺序无关紧要
+
+#8.2.4等效的函数调用
+#修改有默认值的实参时，既可以使用位置方式，也可以使用关键字方式，这跟没有默认值的形参没什么不同
+def describe_pet(pet_name,animal_type="dog"):
+    """显示宠物的信息"""
+    print("\nI have a "+ animal_type + ".")
+    print("My "+animal_type  + "'s is " + pet_name.title() + ".")
+
+describe_pet("harry","hamster")
+
+# 下面对这个函数的所有调用都可行（描述一只叫Willie的小狗）
+def describe_pet(pet_name, animal_type="dog"):
+    """显示宠物的信息"""
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s is " + pet_name.title() + ".")
+
+#位置方式
+describe_pet('willie')
+#关键字实参方式
+describe_pet(pet_name='willie')
+
+#描述一只叫harry的仓鼠（三种调用方式均可行）
+#位置方式
+describe_pet("harry","hasmter")
+#关键字实参方式(与位置无关)
+describe_pet(animal_type="hasmter",pet_name="harry")
+describe_pet(pet_name="harry",animal_type="hasmter")
+
+#8.2.5 避免实参错误：
+#如果不指定任何实参，将会出现类型错误
+def describe_pet(pet_name, animal_type="dog"):
+    """显示宠物的信息"""
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s is " + pet_name.title() + ".")
+
+describe_pet()
+
+#8.3 返回值
+#8.3.1返回简单值
+#下面的函数接受名和姓并返回整洁的姓名
+def get_formatted_name(first_name,last_name):
+    """返回整洁的姓名"""
+    full_name = first_name + " " + last_name
+    return full_name.title()
+
+#调用返回值（首先要建立一个变量，储存返回的值）
+name = get_formatted_name('jimi','hendrix')
+print(name)
+
+#8.3.2让实参变成可选的（给定一个空字符串做默认值，并放在最后。一般会与if-else结构连用）
+#扩展上面的get_formatted_name函数，使其还处理中间名
+def get_formatted_name(first_name,last_name,middle_name=""):
+    if middle_name:
+        full_name = first_name +' '+ middle_name + " "+ last_name
+    else:
+        full_name = first_name + ' '+ last_name
+    return full_name.title()
+
+name = get_formatted_name('john','hooker','lee')
+print(name)
+
+name = get_formatted_name('jimi','hendrix')
+print(name)
+
+#8.3.3返回字典
+#下面函数接受姓名的组成部分，并返回一个表示人的字典
+def build_person(first_name,last_name):
+    """返回一个字典，其中包含有关一个人的信息"""
+    person = {'first':first_name.title(),'last':last_name.title()}
+    return person
+
+musician = build_person('jimi','hendrix')
+print(musician)
+
+#修改函数，使其还能储存年龄（添加一个年龄的可选实参）
+def build_person(first_name,last_name,age=""):
+    """返回一个字典，其中包含有关一个人的信息"""
+    person = {'first':first_name.title(),'last':last_name.title()}
+    if age:
+        person['age'] = age
+        return person
+
+musician = build_person('jimi','hendrix',27)
+print(musician)
+
+#8.3.4结合使用函数和while循环
+#将get_formatted_name函数与while循环结合（这是一个无限循环，需要用户一直输入，无法退出）
+def get_formatted_name(first_name,last_name):
+    """返回整洁的姓名"""
+    full_name = first_name +" "+ last_name
+    return full_name.title()
+
+while True:
+    f_name = input('First name: ')
+    l_name = input('Last name: ')
+
+
+    name = get_formatted_name(f_name,l_name)
+    print(name)
+
+#添加退出条件，当用户输入"q"时退出
+def get_formatted_name(first_name, last_name):
+    """返回整洁的姓名"""
+    full_name = first_name + " " + last_name
+    return full_name.title()
+
+
+while True:
+    print('\nPlease tell me your name: ')
+    print("(enter 'q' at any time to quit)")
+
+    f_name = input("First name: ")
+    if f_name == 'q':
+        break
+
+    l_name = input('Last name: ')
+    if l_name == "q":
+        break
+
+    name = get_formatted_name(f_name,l_name)
+    print("Hello," + name)
+
+#8.4 传递列表
+#假设有一个列表，编写函数问候列表中的每一位用户
+def greet_users(names):
+    """向列表中的每位用户都发出简单的问候"""
+    for name in names:
+        message = 'Hello, ' + name.title() + "!"
+        print(message)
+
+users = ['a','b','c']
+greet_users(users)
+
+#8.4.1在函数中修改列表
+#假设有一家3D打印公司，需要将打印的设计存储在一个列表中，打印后再移到另一个列表中
+
+#首先创建一个列表，其中包含一些要打印的设计
+unprinted_designs =['iphone case','robot pendant','dodecahedron']
+completed_models = []
+
+#模拟打印每个设计，直到没有未打印的设计为止
+#打印每个设计后，都将其移到列表completed_models中
+while unprinted_designs:
+    current_design = unprinted_designs.pop()
+    print("Printing model: "+ current_design)
+
+    #将打印完的设计添加到列表completed_models中
+    completed_models.append(current_design)
+
+#显示打印好的所有模型
+print('\nThe following models have been printed:')
+for completed_model in completed_models:
+    print(completed_model)
+
+#对上述过程，编写两个函数
+#一个函数负责处理打印设计工作
+def print_models(unprinted_designs,completed_models):
+    while unprinted_designs:
+        current_design = unprinted_designs.pop()
+        print("Printing model: "+ current_design)
+        completed_models.append(current_design)
+
+#一个函数概述打印了哪些设计
+def describe_completed_designs(completed_models):
+    print('\nThe following models have been printed: ')
+    for completed_model in completed_models:
+        print(completed_model)
+
+#提供实参，调用函数
+unprinted_designs = ['a','b','c']
+completed_models = []
+
+print_models(unprinted_designs,completed_models)
+describe_completed_designs(completed_models)
+
+#8.4.2禁止函数修改列表（可向函数传递列表的副本而不是原件）
+#修改上面的函数(仅仅是实参处的unprinted_designs[:]变了)
+
+#一个函数负责处理打印设计工作
+def print_models(unprinted_designs,completed_models):
+    while unprinted_designs:
+        current_design = unprinted_designs.pop()
+        print("Printing model: "+ current_design)
+        completed_models.append(current_design)
+
+#一个函数概述打印了哪些设计
+def describe_completed_designs(completed_models):
+    print('\nThe following models have been printed: ')
+    for completed_model in completed_models:
+        print(completed_model)
+
+#提供实参，调用函数
+unprinted_designs = ['a','b','c']
+completed_models = []
+
+print_models(unprinted_designs[:],completed_models)
+describe_completed_designs(completed_models)
+
+print(unprinted_designs)
+print(completed_models)
+
+#8.5传递任意数量的实参（形参名前面带*放到最后，py会将任意个实参封装进一个元组中）
+#制作一个披萨，你事先无法预料到客户需要多少种配料
+def make_pizza(*toppings):
+    """"打印顾客点的所有配料"""
+    print(toppings)
+
+make_pizza('pepperoni')
+make_pizza('mushroon','green peppers','extra cheese')
+
+#遍历配料元组，并对顾客点的比萨进行描述
+def make_pizza(*toppings):
+    """打印顾客点的所有配料"""
+    print('\nMaking a pizza with the following toppings: ')
+    for topping in toppings:
+        print('-' + topping)
+
+make_pizza('mushroon', 'green peppers', 'extra cheese')
+
+#8.5.1结合使用位置实参和任意数量实参（必须将接纳任意数量实参的形参放在最后）
+def make_pizza(size,*toppings):
+    """g概述要制作的披萨"""
+    print('\nMaking a '+ str(size) + '-inch pizza with the following toppings:')
+    for topping in toppings:
+        print('-'+ topping)
+
+make_pizza(16,'mushroon', 'green peppers', 'extra cheese')
+
+#8.5.2使用任意数量的关键字实参（加**并放在最后，py会将任意个关键字实参封装进一个字典中）
+#创建用户简介：你知道你将收到有关用户的信息，但是不确定会是怎样的信息
+def build_profile(first_name,last_name,**user_info):
+    """创建一个字典，其中包含我们知道的有关用户的一切"""
+    profile = {}
+    profile['First name'] = first_name
+    profile['Last name'] = last_name
+    #遍历字典
+    for key,value in user_info.items():
+        #将字典中的键值对加入到profile中
+        profile[key] = value
+
+    print(profile)
+
+build_profile('albert','einstein',
+              location='porinceton',
+              field='phycics')
+
+#用返回字典的方式显示结果
+def build_profile(first_name,last_name,**user_info):
+    """创建一个字典，其中包含我们知道的有关用户的一切"""
+    profile = {}
+    profile['First name'] = first_name
+    profile['Last name'] = last_name
+    #遍历字典
+    for key,value in user_info.items():
+        #将字典中的键值对加入到profile中
+        profile[key] = value
+    return profile
+
+information = build_profile('albert','einstein',
+              location='porinceton',
+              field='phycics')
+print(information)
+#单纯地往字典中添加键-值对，其键名必须引起来
+#但是在这里的location和field作为键名称，偏偏不能引起来，他做的是形参变量名
+
+#8.6将函数储存在模块中（使用import语句）
+#8.6.1导入整个模块
+def make_pizza(size,*toppings):
+    """g概述要制作的披萨"""
+    print('\nMaki a '+ str(size) + '-inch pizza with the following toppings:')
+    for topping in toppings:
+        print('-'+ topping)
+
+#将上述函数另存到一个python文件中（注意编码要都为UTF-8）
+#这里的pizza就是模块
+import pizza
+pizza.make_pizza(16,'pepperoni')
+
+#8.6.2导入特定的函数
+#假定模块pizza中有多个函数(两个)
+
+from pizza import make_pizza,display_message
+
+make_pizza(16,'pepperoni')
+display_message()
+
+#8.6.3使用as给函数指定别名
+from pizza import make_pizza as mp
+mp(16,'pepperoni')
+
+#8.6.4使用as给模块指定别名
+import pizza as p
+p.make_pizza(16,'pepperoni')
+
+#8.6.5导入模块中的所有函数（使用*号）
+from pizza import *
+make_pizza(16,'pepperoni')
+display_message()
+
+

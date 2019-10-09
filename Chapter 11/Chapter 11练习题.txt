@@ -1,0 +1,178 @@
+#!/usr/bin/python
+# -*- coding:utf8 -*-
+
+'''11-1城市和国家：编写一个函数，它接受两个形参：一个城市名和一个国家名。
+这个函数返回一个格式为City, Country的字符串，如Santiago, Chile 。
+将这个函数存储在一个名为city_functions.py的模块中。
+
+创建一个名为test_cities.py的程序，对刚编写的函数进行测试
+（别忘了，你需要导入模块unittest 以及要测试的函数）。编写一个名为test_city_country()的
+方法，核实使用类似于'santiago' 和'chile' 这样的值来调用前述函数时，得到的字符串
+是正确的。运行test_cities.py ，确认测 试test_city_country() 通过了。?'''
+
+#先编写函数并存储
+def get_city_country(city,country):
+    """返回城市及国家"""
+
+    city = input("City: ")
+    country = input("Country: ")
+    city_country = city.title() + "," + country.title()
+    return city_country
+
+#编写测试
+import unittest
+from city_functions import get_city_country
+
+
+class CityCountryTestCase(unittest.TestCase):
+    """测试city_functions.py"""
+
+    def test__city_country(self):
+        """测试函数能否正确处理像'Santiago, Chile'这样的字符串 """
+        my_city_country = get_city_country('santiago', "chile")
+        self.assertEqual(my_city_country, 'Santiago,Chile')
+
+
+unittest.main()
+
+#虽然运行这个程序是有输入的步骤，但是因为结果已经定了'Santiago,Chile'，
+#为了让测试通过和有意义，必须要输入'santiago'和 "chile"。否则就会导致断言失败。
+#这里只要知道，在测试过程中可以采用input()函数输入。而具体的使用方法，还需要以后根据情况编写合适的代码来使用
+
+
+'''11-2人口数量：修改前面的函数，使其包含第三个必不可少的形参population ，
+并返回一个格式为City, Country - population xxx 的字符串， 
+如Santiago, Chile-population 5000000.运行test_cities.py，确认测试test_city_country() 
+未通过。修改上述函数，将形参population设置为可选的。再次运行test_cities.py，
+确认测试test_city_country() 又通过了。
+
+再编写一个名为test_city_country_population()的测试，核实可以使用类似于
+'santiago' 、'chile' 和'population=5000000' 这样的值来调用这个函数。
+再次运行test_cities.py，确认测试test_city_country_population() 通过了。'''
+
+
+#修改函数，并存储到new_city_functions.py中
+
+def get_city_country_population(city,country,population):
+    """返回城市、国家及人口数量"""
+    city_country_population = city.title() + ',' + country.title() + \
+                              '-population ' + str(population)
+    return city_country_population
+
+
+#使用上面的测试检测新函数
+import unittest
+from new_city_functions import get_city_country_population
+
+class CityCountryTestCase(unittest.TestCase):
+    """测试new_city_functions.py，验证不能通过测试"""
+
+    def test_city_countrry(self):
+        """测试函数get_city_country_population不能处理像'Santiago, Chile'这样的字符串"""
+        my_city_country = get_city_country_population('santiago',"chile")
+        self.assertEqual(my_city_country,'Santiago,Chile')
+
+unittest.main()
+
+
+#修改函数get_city_country_population，将形参population设置为可选的
+
+def get_city_country_population(city,country,population=""):
+    """返回城市，国家及人口"""
+    if population:
+        city_country_population = city.title() + ',' + country.title() + \
+                              '-population ' + str(population)
+        return city_country_population
+    else:
+        city_country = city.title() + ',' + country.title()
+        return city_country
+
+#再次用test_city_countrry测试函数get_city_country_population()
+
+import unittest
+from new_city_functions import get_city_country_population_2
+
+
+class CityCountryTestCase(unittest.TestCase):
+    """测试函数get_city_country_population_2"""
+
+    def test_get_city_country(self):
+        """测试函数get_city_country_population能否处理像'Santiago, Chile'这样的字符串"""
+        my_city_country = get_city_country_population_2('santiago', "chile")
+        self.assertEqual(my_city_country, 'Santiago,Chile')
+
+
+unittest.main()
+
+#增加一个测试test_city_country_population()
+import unittest
+from new_city_functions import get_city_country_population_2
+
+
+class CityFunctionsTestCase(unittest.TestCase):
+    """测试函数get_city_country_population_2（）"""
+
+    def test_city_country(self):
+        """测试函数能否正确处理像'Santiago,Chile'这样的字符串"""
+        my_city_country = get_city_country_population_2('santiago', "chile")
+        self.assertEqual(my_city_country, 'Santiago,Chile')
+
+    def test_city_country_population(self):
+        """测试函数能否正确处理像'Santiago,Chile-population 5000000'这样的字符串"""
+        my_city_country_population = get_city_country_population_2(
+            'santiago', "chile", 5000000)
+        self.assertEqual(my_city_country_population,
+                         'Santiago,Chile-population 5000000')
+
+
+unittest.main()
+
+'''11-3 雇员：编写一个名为Employee的类，其方法__init__()接受名、姓和年薪，
+并将它们都存储在属性中。编写一个名为give_raise()的方法，它默认将年薪增加5000美元，
+但也能够接受其他的年薪增加量。
+为Employee 编写一个测试用例，其中包含两个测试方法：test_give_default_raise() 
+和test_give_custom_raise()。使用方法setUp()，以免在每个测试方法中都创建新的雇员实例。
+运行这个测试用例，确认两个测试都通过了。'''
+
+#编写类Employee
+
+class Employee():
+    """一次描述雇员信息的简单尝试"""
+
+    def __init__(self,first_name,last_name):
+        """初始化描述雇员信息的属性"""
+        self.first_name = first_name
+        self.last_name = last_name
+        self.salary = 1000000
+
+    def give_raise(self,a=0):
+        """将年薪增加特定的值，否则默认增加$5000"""
+        if a != 0:
+            self.salary += a
+        else:
+            self.salary += 5000
+        return self.salary
+
+#编写测试用例（包含两个单元测试）
+
+import unittest
+from employee import Employee
+
+class EmolyeeTestCase(unittest.TestCase):
+    """测试emolpyee.py"""
+
+    def setUp(self):
+        """创建一个姓名，供使用的测试方法使用"""
+        self.emplyee = Employee("janis",'joplin')
+
+    def test_give_default_raise(self):
+        """测试函数在不提供薪资增量时，能否给薪资增加默认值"""
+        new_salary = self.emplyee.give_raise()
+        self.assertEqual(new_salary,1005000)
+
+    def test_give_custom_raise(self):
+        """测试函数在给定薪资增量时，能否给薪资增加特定值"""
+        new_salary = self.emplyee.give_raise(10000)
+        self.assertEqual(new_salary,1010000)
+
+unittest.main()

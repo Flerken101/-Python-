@@ -1,0 +1,4 @@
+In Python you can do whatever you want!
+In Python you can read different tpyes of files.
+In Python you can draw something.
+In Python you can program interesting games.

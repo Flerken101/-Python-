@@ -1,0 +1,202 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/7/10 22:18
+# @Author  : Ting
+# @Site    : 
+# @File    : Chapter 7.py
+# @Software: PyCharm
+
+#7.1 函数input（）的工作原理
+message = input('Tell me something,and I will repeat it back to you: ')
+print(message)
+
+#7.1.1 编写清晰的程序
+name = input('Please enter your name: ')
+print('Hello,'+ name +"!")
+
+#创建多行字符串的方式
+prompt = 'If you tell us who you are,we can personalize the message you see.'
+prompt += "\nWhat's your name ? "
+
+name = input(prompt)
+print('Hello,'+ name + '!' )
+
+#7.1.2 使用 int() 来获取数值输入
+age = input('How old are you? ')
+age = int(age)
+print(age+1)
+print(age > 18)
+
+#身高是否满足坐过山车（注意：int函数的接受对象不能是浮点型字符串）
+height = input('How tall are you,in inches? ')
+height = int(height)
+if height >= 36:
+    print('You are tall enough to ride.')
+else:
+    print("You'll be able to ride when you're a little older.")
+
+#7.1.3 求模运算符（将两个数相除并返回余数）
+#结果都是1
+print(4 % 3)
+print(1 % 2)
+
+#判断一个数是奇数还是偶数
+number = input("Enter a number,and I'll tell you if it's even or odd: ")
+number = int(number)
+
+if number % 2 == 0:
+    print('The '+ str(number) +'is even.')
+elif number % 2 == 1:
+    print('The ' + str(number) + ' is odd.')
+
+#7.2 while循环简介（不要忘了冒号）
+#7.2.1使用while循环从1数到5
+current_number = 1
+while current_number <=5:
+    print(current_number)
+    current_number += 1
+
+# current_number =current_number + 1 可以简写为current_number +=
+
+#7.2.2 让用户选择何时退出
+prompt = "\nTell me something,and I'll repeat it back to you: "
+prompt += "\nEnter 'quit' to end the program."
+message = ""
+while message != 'quit':
+    message=input(prompt)
+    print(message)
+
+#添加if测试使输入'quit'时不打印出来
+prompt = "\nTell me something,and I'll repeat it back to you: "
+prompt += "\nEnter 'quit' to end the program. "
+message = ''
+while message != 'quit':
+    message = input(prompt)
+    if message != 'quit':
+        print(message)
+
+#7.2.3 使用标志
+prompt = "\nTell me something,and I'll repeat it back to you: "
+prompt += "\nEnter 'quit' to end the program. "
+
+active = True
+while active:
+    message = input(prompt)
+    if message == 'quit':
+        active = False
+    else:
+        print(message)
+
+#7.2.4 使用break退出
+prompt = "\nPlease enter the name of a city you have visited: "
+prompt += "\n(Enter 'quit' when you are finished.) "
+
+while True:
+    message = input(prompt)
+    if message == 'quit':
+        break
+    else:
+        print("I'd love to go to " + message.title() + "!")
+
+#7.2.5 在循环中使用continue
+#从1数到10，但只打印其中偶数的循环(方法一）
+current_mumber = 1
+while current_mumber <= 10:
+    if current_mumber % 2 == 0:
+        print(current_mumber)
+    current_mumber += 1
+
+#从1数到10，但只打印其中偶数的循环(方法二）
+current_mumber = 0
+while current_mumber <= 10:
+    current_mumber += 1
+    if current_mumber % 2 != 0:
+        continue
+    print(current_mumber)
+
+#从1数到10，但只打印其中奇数的循环(一些笔记见课本)（方法1）
+current_mumber = 0
+while current_mumber < 10:
+    current_mumber += 1
+    if current_mumber % 2 ==0:
+        continue
+    print(current_mumber)
+
+#从1数到10，只打印奇数（方法2）
+a = 1
+while a <= 10:
+    b = a % 2
+    if b ==1:
+        print(a)
+    a = a + 1
+
+#去掉b,使代码更简洁（方法2简化）
+a = 1
+while a <= 10:
+    if a % 2 ==1:
+        print(a)
+    a = a + 1
+
+
+#7.2.6 避免无限循环
+#从1数到5
+current_mumber = 1
+while current_mumber <= 5:
+    print(current_mumber)
+    current_mumber += 1
+#不写最后一行就会造成无限循环
+
+#7.3 使用while循环来处理列表和字典
+#7.3.1在列表之间移动元素
+#验证新注册但还未验证的客户，并将它们移动到已验证列表中
+
+#首先创建一个待验证的用户列表和一个用于储存已验证用户的空列表
+unconfirmed_users = ['alice','brain','candace']
+confirmed_users = []
+
+while unconfirmed_users:
+    #验证过程，需要创建一个新变量
+    current_users = unconfirmed_users.pop()
+    print('Verifying user: '+ current_users.title())
+    #将验证完成的用户加入到已验证列表
+    confirmed_users.append(current_users)
+
+#显示所有已验证的用户
+print('\nThe following users have been confirmed: ')
+for confirmed_user in confirmed_users:
+    print('\t'+confirmed_user.title())
+
+#7.3.2 删除包含特定值的所有列表元素
+#删除下列宠物列表中的cat元素
+pets = ['dog', 'cat', 'dog', 'goldfish', 'cat', 'rabbit', 'cat']
+print(pets)
+
+while 'cat' in pets:
+    pets.remove('cat')
+
+print(pets)
+
+# 7.3.3使用用户输入来填充字典
+# 调查程序：每次循环都提醒被调查者输入名字和回答，并将他们的回答储存在一个字典中，方便关联
+responses = {}
+
+# 设置一个标志，指出调查是否继续
+polling_active = True
+
+while polling_active:
+    # 提示被调查者输入姓名和回答
+    name = input("What's your name? ")
+    response = input('Which programming language do you like best? ')
+
+    # 将答卷储存在字典中（键和值）
+    responses[name] = response
+
+    # 看看是否还有人要参与调查
+    repeat = input('Woukd you like to let another person respond? (yes/no)')
+    if repeat == 'no':
+        polling_active = False
+
+# 调查结束，显示调查结果(遍历字典)
+print('---Poll Results---')
+for name, response in responses.items():
+    print(name + "'s favorite programming language is " + response + '.')
